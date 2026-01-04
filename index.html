@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<!-- تغییر اول: اضافه کردن تم روشن به صورت پیش‌فرض در تگ html -->
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arian Mirdamadi | Portfolio</title>
+    
+    <!-- SEO & Fonts -->
+    <meta name="description" content="Portfolio of Arian Mirdamadi, Computer Engineering student focusing on Computational Neuroscience and Data Science.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&family=Vazirmatn:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Dark Theme */
+            --bg-color: #0a0b10;
+            --card-bg: #161821;
+            --accent-color: #4cc9f0;
+            --text-primary: #f8f9fa;
+            --text-secondary: #adb5bd;
+            --nav-bg: rgba(10, 11, 16, 0.9);
+            --border-color: rgba(255, 255, 255, 0.05);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Light Theme (حالا این تم پیش‌فرض خواهد بود) */
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --card-bg: #ffffff;
+            --accent-color: #0077b6;
+            --text-primary: #1a1a1b;
+            --text-secondary: #4a4a4a;
+            --nav-bg: rgba(240, 242, 245, 0.9);
+            --border-color: rgba(0, 0, 0, 0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { font-family: 'Inter', 'Vazirmatn', sans-serif; background-color: var(--bg-color); color: var(--text-primary); line-height: 1.6; overflow-x: hidden; transition: var(--transition); }
+        
+        /* RTL Support */
+        body.rtl { direction: rtl; text-align: right; }
+        body.rtl .nav-links { flex-direction: row-reverse; }
+        body.rtl .section-title::after { left: auto; right: 0; }
+        body.rtl .btn-action i { margin-left: 10px; margin-right: 0; }
+        body.rtl .skill-item i { margin-left: 10px; margin-right: 0; }
+
+        /* --- Navigation --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1rem 5%;
+            display: flex; justify-content: space-between; align-items: center;
+            background: var(--nav-bg); backdrop-filter: blur(12px); z-index: 1000;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .scrolling-text-container {
+            width: 150px; overflow: hidden; white-space: nowrap;
+            background: rgba(255, 255, 255, 0.03); border: 1px dashed var(--accent-color);
+            padding: 4px 8px; border-radius: 4px;
+        }
+
+        .marquee-content {
+            display: inline-block; font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem; color: var(--accent-color);
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
+        .nav-right { display: flex; align-items: center; gap: 1.5rem; }
+        .nav-links { display: flex; gap: 1.2rem; }
+        .nav-links a { text-decoration: none; color: var(--text-secondary); font-size: 0.85rem; transition: var(--transition); font-weight: 500; }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- Controls --- */
+        .controls { display: flex; align-items: center; gap: 10px; background: var(--card-bg); padding: 5px; border-radius: 50px; border: 1px solid var(--border-color); }
+        .lang-toggle { display: flex; gap: 5px; }
+        .lang-btn { background: transparent; border: none; color: var(--text-secondary); padding: 4px 10px; border-radius: 20px; cursor: pointer; font-size: 0.7rem; font-family: 'JetBrains Mono'; transition: var(--transition); }
+        .lang-btn.active { background: var(--accent-color); color: var(--bg-color); font-weight: bold; }
+        .theme-btn { background: transparent; border: none; color: var(--text-primary); cursor: pointer; font-size: 1rem; padding: 5px 10px; display: flex; align-items: center; transition: var(--transition); border-left: 1px solid var(--border-color); }
+        body.rtl .theme-btn { border-left: none; border-right: 1px solid var(--border-color); }
+
+        /* --- Sections --- */
+        section { padding: 100px 10%; max-width: 1300px; margin: 0 auto; }
+        .section-title { font-size: 2.2rem; margin-bottom: 3rem; position: relative; font-weight: 800; }
+        .section-title::after { content: ''; position: absolute; bottom: -12px; left: 0; width: 60px; height: 4px; background: var(--accent-color); border-radius: 2px; }
+
+        /* --- Hero --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 120px 10% 60px; }
+        .hero-container { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; width: 100%; max-width: 1200px; }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1.1; margin-bottom: 1.5rem; font-weight: 800; }
+        .hero p { font-family: 'JetBrains Mono'; color: var(--accent-color); margin-bottom: 2.5rem; font-size: 1.1rem; }
+        .image-container { position: relative; width: 320px; height: 320px; }
+        .hero-image { width: 100%; height: 100%; border-radius: 24px; object-fit: cover; border: 1px solid var(--border-color); background: var(--card-bg); z-index: 5; position: relative; }
+        .floating-icon { position: absolute; color: var(--accent-color); font-size: 1.8rem; opacity: 0.6; z-index: 6; animation: float 4s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+
+        /* --- Skills Section --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .skills-category { background: var(--card-bg); padding: 2rem; border-radius: 20px; border: 1px solid var(--border-color); transition: var(--transition); }
+        .skills-category:hover { border-color: var(--accent-color); }
+        .skills-category h3 { color: var(--accent-color); margin-bottom: 1.5rem; font-size: 1.2rem; display: flex; align-items: center; gap: 10px; }
+        .skill-list { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; }
+        .skill-item { background: rgba(255, 255, 255, 0.05); padding: 8px 15px; border-radius: 8px; font-size: 0.85rem; border: 1px solid transparent; transition: 0.3s; display: flex; align-items: center; }
+        .skill-item:hover { background: rgba(76, 201, 240, 0.1); border-color: var(--accent-color); transform: scale(1.05); }
+        .skill-item i { margin-right: 8px; color: var(--accent-color); }
+
+        /* --- Common --- */
+        .card { background: var(--card-bg); padding: 2.5rem; border-radius: 20px; border: 1px solid var(--border-color); transition: var(--transition); }
+        .btn-action { padding: 1rem 2rem; background: var(--accent-color); color: var(--bg-color); text-decoration: none; font-weight: 700; border-radius: 8px; display: inline-flex; align-items: center; gap: 10px; }
+
+        footer { text-align: center; padding: 60px 10%; border-top: 1px solid var(--border-color); }
+
+        @media (max-width: 992px) {
+            .nav-links { display: none; }
+            .hero-container { grid-template-columns: 1fr; text-align: center; }
+            .image-container { margin: 0 auto 2rem; }
+        }
+    </style>
+</head>
+<body id="main-body">
+
+    <nav>
+        <div class="scrolling-text-container">
+            <span class="marquee-content" data-key="marquee">Computer Engineering • Future Data Scientist • Research & Development • Arian Mirdamadi • System Active •</span>
+        </div>
+        
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="#research" data-key="nav_research">Objective</a>
+                <a href="#skills" data-key="nav_skills">Academic Skills</a>
+                <a href="#volunteer" data-key="nav_volunteer">Activities</a>
+                <a href="#contact" data-key="nav_contact">Connect</a>
+            </div>
+            
+            <div class="controls">
+                <div class="lang-toggle">
+                    <button class="lang-btn" id="btn-en" onclick="setLanguage('en')">EN</button>
+                    <button class="lang-btn" id="btn-fa" onclick="setLanguage('fa')">FA</button>
+                    <button class="lang-btn" id="btn-ru" onclick="setLanguage('ru')">RU</button>
+                </div>
+                <button class="theme-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+                    <i id="theme-icon" class="fas fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 data-key="hero_name">Arian Mirdamadi</h1>
+                <p data-key="hero_subtitle">Computer Engineering Student | Aspiring Data Scientist</p>
+                <a href="#contact" class="btn-action">
+                    <i class="fas fa-paper-plane"></i>
+                    <span data-key="hero_btn">Academic Connect</span>
+                </a>
+            </div>
+            <div class="hero-image-wrapper">
+                <div class="image-container">
+                    <i class="fab fa-python floating-icon" style="top:-10px; left:-10px;"></i>
+                    <i class="fas fa-brain floating-icon" style="top:40%; left:-35px; animation-delay:1s;"></i>
+                    <img src="C:\Users\ACER\Desktop\MY_PORTFOLIO\images\Copilot_20260105_014522.png" alt="Arian Mirdamadi" class="hero-image">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="research">
+        <div class="section-title" data-key="nav_research">Objective</div>
+        <div class="card">
+            <h2 data-key="research_title">Path to Data Science</h2>
+            <p data-key="research_desc" style="margin-top: 1rem;">
+                As a dedicated Computer Engineering student, I am currently navigating the intersection of hardware foundations and high-level analytical algorithms. My current research focus is on bridging the gap between computational principles and the future of Data Science, specifically exploring how neural data can be decoded through advanced programming.
+            </p>
+        </div>
+    </section>
+
+    <!-- SKILLS SECTION -->
+    <section id="skills">
+        <h2 class="section-title" data-key="nav_skills">Academic Skills</h2>
+        <div class="skills-grid">
+            <!-- Focus -->
+            <div class="skills-category">
+                <h3><i class="fas fa-microchip"></i> <span data-key="skill_cat_1">Research Focus</span></h3>
+                <div class="skill-list">
+                    <span class="skill-item"><i class="fas fa-check-circle"></i> Machine Learning Study</span>
+                    <span class="skill-item"><i class="fas fa-check-circle"></i> Statistical Analysis</span>
+                    <span class="skill-item"><i class="fas fa-check-circle"></i> Neural Engineering</span>
+                    <span class="skill-item"><i class="fas fa-check-circle"></i> Algorithm Design</span>
+                </div>
+            </div>
+            <!-- Programming -->
+            <div class="skills-category">
+                <h3><i class="fas fa-code"></i> <span data-key="skill_cat_2">Multilingual Coding</span></h3>
+                <div class="skill-list">
+                    <span class="skill-item"><i class="fab fa-python"></i> Python (Research)</span>
+                    <span class="skill-item"><i class="fas fa-database"></i> SQL (Foundations)</span>
+                    <span class="skill-item"><i class="fas fa-square-root-alt"></i> MATLAB</span>
+                    <span class="skill-item"><i class="fab fa-r-project"></i> R Language</span>
+                </div>
+            </div>
+            <!-- Tools -->
+            <div class="skills-category">
+                <h3><i class="fas fa-tools"></i> <span data-key="skill_cat_3">Academic Tools</span></h3>
+                <div class="skill-list">
+                    <span class="skill-item"><i class="fab fa-git-alt"></i> Version Control</span>
+                    <span class="skill-item"><i class="fas fa-flask"></i> Data Visualization</span>
+                    <span class="skill-item"><i class="fas fa-project-diagram"></i> TensorFlow (Learning)</span>
+                    <span class="skill-item"><i class="fas fa-chart-line"></i> Scientific Computing</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="volunteer">
+        <h2 class="section-title" data-key="vol_title">Leadership & Activities</h2>
+        <div class="card">
+            <i class="fas fa-microphone-alt"></i>
+            <h3 data-key="vol_card_title" style="margin-top: 10px;">Digital Economy & AI Coordinator</h3>
+            <p data-key="vol_card_desc" style="margin-top: 1rem;">Coordinated high-level technical sessions at the 'Digital Economy & AI' conference at IAU, fostering a collaborative environment between students and industry experts.</p>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2 class="section-title" data-key="nav_contact">Connect</h2>
+        <div class="card" style="text-align: center;">
+            <i class="fas fa-envelope"></i>
+            <p id="email-display" style="margin: 1rem 0; font-family: 'JetBrains Mono';">arianmirdamadi1996@gmail.com</p>
+            <div style="display: flex; justify-content: center; gap: 20px; font-size: 1.8rem;">
+                <a href="https://linkedin.com/in/arianmirdamadi" target="_blank" style="color: var(--accent-color);"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/arianmirdamadi1996-cmd" target="_blank" style="color: var(--accent-color);"><i class="fab fa-github"></i></a>
+                <a href="https://t.me/arianmirdamadi" target="_blank" style="color: var(--accent-color);"><i class="fab fa-telegram"></i></a>
+            </div>
+        </div>
+
+        <div class="secret-trigger" onclick="toggleSecret()">
+            <i class="fas fa-fingerprint"></i> <small data-key="secret_btn">[Decrypt Research Node]</small>
+        </div>
+        <div id="secret-content">
+            <p id="secret-msg">> AUTHENTICATION SUCCESSFUL... LOADING ACADEMIC LOGS...</p>
+        </div>
+    </section>
+
+    <footer>
+        <p data-key="footer">© 2026 Arian Mirdamadi | Computer Engineering & Neuroscience Aspirant</p>
+    </footer>
+
+    <script>
+        const translations = {
+            en: {
+                marquee: "Computer Engineering • Future Data Scientist • Research & Development • Arian Mirdamadi • System Active •",
+                nav_research: "Objective", nav_skills: "Academic Skills", nav_volunteer: "Activities", nav_contact: "Connect",
+                hero_name: "Arian Mirdamadi", hero_subtitle: "Computer Engineering Student | Aspiring Data Scientist",
+                hero_btn: "Academic Connect", research_title: "Path to Data Science",
+                research_desc: "As a dedicated Computer Engineering student, I am currently navigating the intersection of hardware foundations and high-level analytical algorithms. My focus is on decoding complex neural data through research and multilingual programming.",
+                skill_cat_1: "Research Focus", skill_cat_2: "Multilingual Coding", skill_cat_3: "Academic Tools",
+                vol_title: "Leadership & Activities", vol_card_title: "Digital Economy & AI Coordinator",
+                vol_card_desc: "Coordinated technical sessions at the 'Digital Economy & AI' conference, bridging the gap between academic research and industry application.",
+                secret_btn: "[Decrypt Research Node]",
+                footer: "© 2026 Arian Mirdamadi | Computer Engineering & Neuroscience Aspirant"
+            },
+            fa: {
+                marquee: "مهندسی کامپیوتر • دانشمند داده آینده • تحقیق و توسعه • آرین میردامادی • سیستم فعال •",
+                nav_research: "اهداف", nav_skills: "مهارت‌های آکادمیک", nav_volunteer: "فعالیت‌ها", nav_contact: "ارتباط",
+                hero_name: "آرین میردامادی", hero_subtitle: "دانشجوی مهندسی کامپیوتر | مشتاق در مسیر علوم داده",
+                hero_btn: "ارتباط آکادمیک", research_title: "مسیر رسیدن به علوم داده",
+                research_desc: "به عنوان یک دانشجوی مهندسی کامپیوتر، در حال بررسی تلاقی زیرساخت‌های سخت‌افزاری و الگوریتم‌های تحلیلی سطح بالا هستم. تمرکز فعلی من بر رمزگشایی داده‌های عصبی از طریق تحقیق و کدنویسی با زبان‌های مختلف است.",
+                skill_cat_1: "تمرکز پژوهشی", skill_cat_2: "کدنویسی چندزبانه", skill_cat_3: "ابزارهای آکادمیک",
+                vol_title: "رهبری و فعالیت‌ها", vol_card_title: "هماهنگ‌کننده اقتصاد دیجیتال و هوش مصنوعی",
+                vol_card_desc: "هماهنگی جلسات تخصصی در کنفرانس اقتصاد دیجیتال و هوش مصنوعی، با هدف ایجاد پل ارتباطی بین تحقیقات دانشگاهی و صنعت.",
+                secret_btn: "[رمزگشایی نود تحقیقاتی]",
+                footer: "© ۲۰۲۶ آرین میردامادی | دانشجوی مهندسی کامپیوتر و علوم اعصاب"
+            },
+            ru: {
+                marquee: "Компьютерная инженерия • Будущий Data Scientist • Исследования • Ариан Мирдамади •",
+                nav_research: "Цель", nav_skills: "Академические навыки", nav_volunteer: "Деятельность", nav_contact: "Связь",
+                hero_name: "Ариан Мирдамади", hero_subtitle: "Студент компьютерной инженерии | Будущий Data Scientist",
+                hero_btn: "Связаться", research_title: "Путь в Data Science",
+                research_desc: "Как студент инженерного факультета, я изучаю пересечение аппаратных основ и аналитических алгоритмов.",
+                skill_cat_1: "Исследования", skill_cat_2: "Программирование", skill_cat_3: "Инструменты",
+                vol_title: "Деятельность", vol_card_title: "Координатор ИИ конференций",
+                vol_card_desc: "Координатор технических сессий на конференции по цифровой экономике и ИИ.",
+                secret_btn: "[Расшифровать узел]",
+                footer: "© 2026 Ариان Мирдамади | Компьютерная инженерия и Нейронауки"
+            }
+        };
+
+        function setLanguage(lang) {
+            const body = document.getElementById('main-body');
+            lang === 'fa' ? body.classList.add('rtl') : body.classList.remove('rtl');
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`btn-${lang}`).classList.add('active');
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (translations[lang][key]) el.textContent = translations[lang][key];
+            });
+            localStorage.setItem('arianLang', lang);
+        }
+
+        function toggleTheme() {
+            const body = document.documentElement;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            document.getElementById('theme-icon').className = newTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('arianTheme', newTheme);
+        }
+
+        function toggleSecret() {
+            const sc = document.getElementById('secret-content');
+            sc.style.display = sc.style.display === 'block' ? 'none' : 'block';
+        }
+
+        window.onload = () => {
+            setLanguage(localStorage.getItem('arianLang') || 'en');
+            const savedTheme = localStorage.getItem('arianTheme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('theme-icon').className = savedTheme === 'light' ? 'fas fa-sun' : 'fas fa-moon';
+        };
+    </script>
+</body>
+</html>
